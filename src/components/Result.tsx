@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 interface Result {
@@ -8,7 +9,11 @@ interface Result {
 
 export function Result() {
   const { state } = useLocation();
-  const results : Result[] = state.results; 
+  const [results, setResults] = useState<Result[]>([])
+
+  setResults(state);
+
+  debugger;
 
   return (
     <>
