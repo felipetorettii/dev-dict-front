@@ -10,6 +10,9 @@ module.exports = {
       },
       backgroundSize: {
         '16': '1.25rem'
+      },
+      colors : {
+        'blue-link': '#1a0dab'
       }
     }
   },

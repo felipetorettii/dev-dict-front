@@ -3,20 +3,27 @@
 @tailwind utilities;
 
 body {
-  background-color: #202124;
+  @apply bg-white;
   -webkit-font-smoothing: antialiased;
 }
 
 @layer components {
   .input-search {
     @apply rounded-3xl border border-solid border-gray-300 text-slate-700 
-    outline-none font-arial text-[0.850rem] w-96 h-8 pl-3 mt-3 hover:border-[2px]
+    outline-none font-arial text-[1rem] w-[28rem] h-10 pl-3 mt-3 hover:border-[2px]   
   }
 
   .button-search {
     @apply bg-[#f8f9fa] border border-solid border-[#f8f9fa] rounded text-[#3c4043] 
     font-arial text-xs my-2 mx-1 px-4 h-8 min-w-[3.375rem] text-center cursor-pointer select-none
     hover:bg-gray-200
+  }
+
+  .dashed {
+    background-image: linear-gradient(to right, black 33%, rgba(255,255,255,0) 0%);
+    background-position: bottom;
+    background-size: 20px 1px;
+    background-repeat: repeat-x;
   }
 }
 
