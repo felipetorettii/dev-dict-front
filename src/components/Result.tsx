@@ -39,8 +39,8 @@ export function Result() {
           {results.map(res => {
             return (
               <li key={res.Title}>
-                <a className="text-[#1a0dab] hover:underline visited:text-[#681da8]" href={res.Link}>
-                  <h3 className="text-xl">{res.Title}</h3>
+                <a className="text-[#1a0dab] hover:underline visited:text-[#681da8] w-fit text-xl" href={res.Link}>
+                  {res.Title}
                 </a>
                 <p>{res.Description}</p>
                 <br></br>

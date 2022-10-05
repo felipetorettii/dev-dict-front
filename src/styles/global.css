@@ -11,12 +11,13 @@ body {
   .input-search {
     @apply rounded-3xl border border-solid border-gray-300 text-slate-700 
     outline-none font-arial text-[1rem] w-[28rem] h-10 pl-3 mt-3 hover:border-[2px]   
+    w-[652px]
   }
 
   .button-search {
-    @apply bg-[#f8f9fa] border border-solid border-[#f8f9fa] rounded text-[#3c4043] 
-    font-arial text-xs my-2 mx-1 px-4 h-8 min-w-[3.375rem] text-center cursor-pointer select-none
-    hover:bg-gray-200
+    @apply bg-[#d2d9df] border border-solid border-[#d2d9df] rounded text-[#3c4043] 
+    font-arial text-xs my-2 mx-1 px-4 h-8 text-center cursor-pointer select-none
+    hover:bg-gray-200 w-48
   }
 
   .dashed {
