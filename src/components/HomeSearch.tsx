@@ -11,15 +11,19 @@ interface Result {
 }
 
 export function HomeSearch() {
-  const [results, setResults] = useState<Result[]>([])
   const [text, setText] = useState('');
   const navigate = useNavigate();
 
   const doSearch = async () => {
-    doSearchRequest(text).then(data => {
-      setResults(data);
-      navigate("/results", { state : { results : data, text} });
-    })
+    let results : Result[] = [];
+    let page = 0;
+    while (results.length < 20) {
+      const response = await doSearchRequest(text, page);
+      results = results.concat(response);
+      page += 10;
+    }
+    navigate("/results", { state : { results, text, page} });
+    
   }
 
   return (
