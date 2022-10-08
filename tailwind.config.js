@@ -13,6 +13,12 @@ module.exports = {
       },
       colors : {
         'blue-link': '#1a0dab'
+      },
+      backgroundImage: {
+        'magnifying-glass': "url('/src/assets/lupa.png')",
+      },
+      backgroundSize: {
+        '50': '5%'
       }
     }
   },

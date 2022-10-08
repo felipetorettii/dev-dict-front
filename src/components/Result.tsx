@@ -4,6 +4,7 @@ import doSearchRequest from "../services/SearchService";
 import { LogoNoDots } from "./LogoNoDots";
 import { SearchInput } from "./SearchInput";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import loading from '../assets/loading.gif'
 
 interface Result {
   Description?: string
@@ -16,8 +17,10 @@ export function Result() {
   const [text, setText] = useState(state.text);
   const [results, setResults] = useState<Result[]>(state.results);
   const [page, setPage] = useState(state.page);
+  const initialText = state.text;
 
   const refreshResults = async () => {
+    if (text.length === 0) return;
     let newResults : Result[] = [];
     let newPage = 0;
     while (newResults.length < 20) {
@@ -32,7 +35,7 @@ export function Result() {
   const getMoreResults = async () => {
     try {
       setPage(page+10);
-      const newResults = await doSearchRequest(text, page);
+      const newResults = await doSearchRequest(initialText, page);
       setResults(results.concat(newResults));
     } catch (err) {}
   };
@@ -45,18 +48,18 @@ export function Result() {
             <LogoNoDots/>
           </a>
           <div className="mt-1">
-            <SearchInput value={text} handleOnChange={setText} doSearchKeyFunction={refreshResults}/>  
+            <SearchInput value={text} handleOnChange={setText} doSearchKeyFunction={refreshResults}/>
           </div>
         </div>
       </div>
       <div className="dashed"></div>
-      <div className="ml-64 mt-4">
+      <div className="ml-64 mt-4 w-[40rem]">
         <ul>
           <InfiniteScroll
             dataLength={results.length}
             next={getMoreResults}
             hasMore={true}
-            loader={<h4>Loading...</h4>}
+            loader={<img className="w-20 h-20" src={loading} alt="loading..."/>}
             >
             {results.map((res, index) => {
               return (

@@ -15,6 +15,7 @@ export function HomeSearch() {
   const navigate = useNavigate();
 
   const doSearch = async () => {
+    if (text.length === 0) return;
     let results : Result[] = [];
     let page = 0;
     while (results.length < 20) {

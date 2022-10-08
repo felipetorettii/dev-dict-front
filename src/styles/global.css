@@ -10,8 +10,8 @@ body {
 @layer components {
   .input-search {
     @apply rounded-3xl border border-solid border-gray-300 text-slate-700 
-    outline-none font-arial text-[1rem] w-[28rem] h-10 pl-3 mt-3 hover:border-[2px]   
-    w-[652px]
+    outline-none font-arial text-[1rem] w-[28rem] h-10 pl-3 mt-3 hover:border-[2px]
+    bg-magnifying-glass bg-no-repeat bg-right bg-50
   }
 
   .button-search {

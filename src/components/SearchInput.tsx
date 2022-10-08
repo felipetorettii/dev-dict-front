@@ -7,6 +7,8 @@ export function SearchInput({value, handleOnChange, doSearchKeyFunction} : any) 
   }
 
   return (
-    <input type="text" className="input-search" value={value} onChange={(e) => handleOnChange(e.target.value)} onKeyDown={doSearchKey}/>
+    <label >
+      <input type="text" className="input-search" value={value} onChange={(e) => handleOnChange(e.target.value)} onKeyDown={doSearchKey}/>
+    </label>
   )
 }
