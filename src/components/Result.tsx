@@ -41,6 +41,15 @@ export function Result() {
     } catch (err) {}
   };
 
+  const getHostWithProtocol = (link: string) : string => {
+    const linkUrl = new URL(link);
+    return `${linkUrl.protocol}//${linkUrl.host}`
+  }
+
+  const getTranslatedPage = (link : string) : string => {
+    return `https://translate.google.com/translate?hl=pt-BR&sl=en&u=${link}`
+  }
+
   return (
     <div className="mt-2">
       <div className="dashed pb-4">
@@ -65,6 +74,11 @@ export function Result() {
             {results.map((res, index) => {
               return (
                 <li key={index}>
+                  <cite role="text" className="cite-host">{getHostWithProtocol(res.Link || "")}
+                    <span role="text"> › ...</span>
+                    <a className="anchor-translated" href={getTranslatedPage(res.Link || "")}>Ver página traduzida</a>
+                  </cite>
+                  <br/>
                   <a className="text-[#1a0dab] hover:underline visited:text-[#681da8] w-fit text-xl" href={res.Link}>
                     {res.Title}
                   </a>
