@@ -5,6 +5,7 @@ import { LogoNoDots } from "./LogoNoDots";
 import { SearchInput } from "./SearchInput";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import loading from '../assets/loading.gif'
+import './Result.css'
 
 interface Result {
   Description?: string
@@ -47,13 +48,13 @@ export function Result() {
           <a href="/" className="mr-10"> 
             <LogoNoDots/>
           </a>
-          <div className="mt-1">
+          <div style={{minWidth: "448px", marginTop: "0.25rem"}}>
             <SearchInput value={text} handleOnChange={setText} doSearchKeyFunction={refreshResults}/>
           </div>
         </div>
       </div>
       <div className="dashed"></div>
-      <div className="ml-64 mt-4 w-[40rem]">
+      <div className="center_col">
         <ul>
           <InfiniteScroll
             dataLength={results.length}

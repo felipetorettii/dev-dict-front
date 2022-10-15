@@ -29,3 +29,8 @@ body {
   }
 }
 
+@media (max-width: 1121px) {
+  .input-search {
+      width: 90%;
+  }
+}
