@@ -8,6 +8,9 @@ body {
 }
 
 @layer components {
+  .loading-component {
+    @apply flex justify-center items-center w-[100vw] h-[1vw]
+  }
   .input-search {
     background-position-x: 98% !important;
     @apply rounded-3xl border border-solid border-gray-300 text-slate-700 
