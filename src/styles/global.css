@@ -24,6 +24,14 @@ body {
     hover:bg-gray-200 w-48
   }
 
+  .refresh-language-anchor {
+    @apply w-[3%] hover:cursor-pointer
+  }
+
+  .refresh-language-div {
+    @apply flex items-center
+  }
+
   .dashed {
     background-image: linear-gradient(to right, black 33%, rgba(255,255,255,0) 0%);
     background-position: bottom;

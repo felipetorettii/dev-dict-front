@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import doSearchRequest from "../services/SearchService";
 import { LogoNoDots } from "./LogoNoDots";
@@ -7,10 +7,13 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import loading from '../assets/loading.gif'
 import ReactLoading from 'react-loading';
 import './Result.css'
+import _ from 'underscore'
 
 interface Result {
+  OriginalDescription?: string
   Description?: string
   Title?: string
+  OriginalTitle?: string
   Link?: string
 }
 
@@ -21,7 +24,7 @@ export function Result() {
   const [loadingResults, setLoadingResults] = useState(false);
   const [page, setPage] = useState(state.page);
   const initialText = state.text;
-
+  
   const refreshResults = async () => {
     if (text.length === 0) return;
     let newResults : Result[] = [];
@@ -47,11 +50,21 @@ export function Result() {
 
   const getHostWithProtocol = (link: string) : string => {
     const linkUrl = new URL(link);
-    return `${linkUrl.protocol}//${linkUrl.host}`
+    return `${linkUrl.protocol}//${linkUrl.host}`;
   }
 
   const getTranslatedPage = (link : string) : string => {
-    return `https://translate.google.com/translate?hl=pt-BR&sl=en&u=${link}`
+    return `https://translate.google.com/translate?hl=pt-BR&sl=en&u=${link}`;
+  }
+
+  const onClickOriginalResult = async (result  : Result) => {
+    const descriptionHolder = result.Description;
+    const titleHolder = result.Title;
+    result.Description = (result.OriginalDescription || "").replaceAll("&#39;", "'");
+    result.Title = result.OriginalTitle;
+    result.OriginalDescription = (descriptionHolder || "").replaceAll("&#39;", "'");
+    result.OriginalTitle = titleHolder;
+    setResults(results.slice());
   }
 
   return (
@@ -85,11 +98,16 @@ export function Result() {
                     <cite role="text" className="cite-host">{getHostWithProtocol(res.Link || "")}
                       <span role="text"> › ...</span>
                       <a className="anchor-translated" href={getTranslatedPage(res.Link || "")}>Ver página traduzida</a>
-                    </cite>
+                    </cite> 
                     <br/>
-                    <a className="text-[#1a0dab] hover:underline visited:text-[#681da8] w-fit text-xl" href={res.Link}>
-                      {res.Title}
-                    </a>
+                    <div className="refresh-language-div">
+                      <a title="Ver resultado original" className="refresh-language-anchor" onClick={() => onClickOriginalResult(res)}>
+                        <img src="src/assets/refresh.jpg" alt="Ver resultado original"/>
+                      </a>
+                      <a className="text-[#1a0dab] hover:underline ml-1 visited:text-[#681da8] w-fit text-xl" href={res.Link}>
+                        {res.Title}
+                      </a>
+                    </div>
                     <p>{res.Description}</p>
                     <br></br>
                   </li>
