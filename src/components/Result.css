@@ -24,6 +24,10 @@
     @apply text-[#1a0dab] cursor-pointer hover:underline ml-1
 }
 
+.total {
+    color: rgb(51 65 85);
+}
+
 p, a {
     height: auto;
 }

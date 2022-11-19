@@ -5,9 +5,16 @@ import { SearchInput } from './SearchInput';
 import ReactLoading from 'react-loading';
 
 interface Result {
+  OriginalDescription?: string
   Description?: string
   Title?: string
+  OriginalTitle?: string
   Link?: string
+}
+
+interface Page {
+  results?: Result[]
+  total?: string
 }
 
 export function HomeSearch() {
@@ -20,15 +27,17 @@ export function HomeSearch() {
     setLoadingResults(true);
     let results : Result[] = [];
     let page = 0;
+    let total = "";
     while (results.length < 20) {
       const response = await doSearchRequest(text, page);
       page += 10;
       if (response == null) {
         continue;
       }
-      results = results.concat(response);
+      results = results.concat(response.Sites);
+      total = response.Total
     }
-    navigate("/results", { state : { results, text, page} });
+    navigate("/results", { state : { results, text, page, total} });
     
   }
 

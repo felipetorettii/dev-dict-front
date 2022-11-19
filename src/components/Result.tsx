@@ -20,6 +20,7 @@ interface Result {
 export function Result() {
   const { state } = useLocation();
   const [text, setText] = useState(state.text);
+  const [total, setTotal] = useState(state.total);
   const [results, setResults] = useState<Result[]>(state.results);
   const [loadingResults, setLoadingResults] = useState(false);
   const [page, setPage] = useState(state.page);
@@ -32,7 +33,8 @@ export function Result() {
     let newPage = 0;
     while (newResults.length < 20) {
       const response = await doSearchRequest(text, newPage);
-      newResults = newResults.concat(response);
+      newResults = newResults.concat(response.Sites);
+      setTotal(response.Total)
       newPage += 10;
     }
     setResults(newResults);
@@ -44,7 +46,7 @@ export function Result() {
     try {
       setPage(page+10);
       const newResults = await doSearchRequest(initialText, page);
-      setResults(results.concat(newResults));
+      setResults(results.concat(newResults.Sites));
     } catch (err) {}
   };
 
@@ -68,8 +70,8 @@ export function Result() {
   }
 
   return (
-    <div className="mt-2">
-      <div className="dashed pb-4">
+    <div className="mt-2 w-screen">
+      <div className="dashed pb-4 w-screen">
         <div className="flex ml-8">
           <a href="/" className="mr-10"> 
             <LogoNoDots/>
@@ -85,6 +87,8 @@ export function Result() {
           <ReactLoading type="bubbles" color="#e5e7eb" height="5%" width="5%"/>
         </div> : 
         <div className="center_col">
+          <p className="total">Total de {total} resultados</p>          
+          <br />
           <ul>
             <InfiniteScroll
               dataLength={results.length}
